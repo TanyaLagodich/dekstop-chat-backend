@@ -1,16 +1,23 @@
 import Express from 'express';
+import * as dotenv from 'dotenv';
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
 
 import UserModel from './models/User.js';
 
+dotenv.config();
+
 const app = new Express();
 
-main().catch(err => console.log(err));
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => {
+    console.log('DB connection is successfull');
+  })
+  .catch((err) => {
+    console.error(err);
+  })
 
-async function main() {
-  await mongoose.connect('mongodb://localhost:27017/test');
-}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
