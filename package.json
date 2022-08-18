@@ -1,0 +1,27 @@
+{
+  "name": "dekstop-chat-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanyaLagodich/dekstop-chat-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TanyaLagodich/dekstop-chat-backend/issues"
+  },
+  "homepage": "https://github.com/TanyaLagodich/dekstop-chat-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2",
+    "nodemon": "^2.0.19",
+    "socket.io": "^4.5.1"
+  }
+}
