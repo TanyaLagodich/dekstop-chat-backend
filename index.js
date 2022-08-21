@@ -2,8 +2,7 @@ import Express from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
-
-import UserModel from './models/User.js';
+import router from './routes/index.js';
 
 dotenv.config();
 
@@ -22,11 +21,7 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/sign-up', (req, res) => {
-  const user = new UserModel(req.body);
-  console.log(user);
-  res.send('it\'s working');
-})
+app.use('/api', router);
 
 app.get('/', (req, res) => {
   res.send('Hello world');
