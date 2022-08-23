@@ -1,15 +1,11 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-const DialogSchema = new Schema({
-  author: { 
+const ChatSchema = new Schema({
+  members: [{ 
     type: Schema.Types.ObjectId, 
     ref: 'User',
-   },
-  partner: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User',
-   },
+   }],
   lastMessage: { 
     type: Schema.Types.ObjectId, 
     ref: 'Message',
@@ -18,5 +14,5 @@ const DialogSchema = new Schema({
   timestamps: true,
 });
 
-const DialogModel = model('Dialog', DialogSchema);
-export default DialogModel;
+const ChatModel = model('Dialog', ChatSchema);
+export default ChatModel;

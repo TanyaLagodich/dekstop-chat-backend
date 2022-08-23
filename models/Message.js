@@ -2,19 +2,20 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const MessageSchema = new Schema({
+  userId: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User',
+  },
+  chatId: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Chat',
+  },
   text: {
     type: String,
-    require: true,
+    required: true,
   },
-  dialog: {
-    type: Schema.Types.ObjectId, 
-    ref: 'Dialog',
-    require: true,
-  },
-  read: {
-    type: Boolean,
-    default: false,
-  },
+  read: Boolean,
+  attachments: String, // TODO
 }, {
   timestamps: true,
 });
