@@ -7,20 +7,19 @@ export default class UserController {
   async createUser(req, res) {
     const { name, email, password } = req.body;
 
-    const isUserExist = await UserModel.findOne({ email });
-
-    if (isUserExist) {
-      res.status(409);
-      res.json({ error: 'Email is already exsist'});
-    } else {
+    try {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = new UserModel({
         name, 
         email, 
         password: hashedPassword,
       });
-      user.save();
-      res.json(user);
+      const savedUser = await user.save();
+      console.log(savedUser);
+      res.json(savedUser);
+    } catch (err) {
+      res.status(409); // TODO check status of error
+      res.json(err);
     }
   }
 

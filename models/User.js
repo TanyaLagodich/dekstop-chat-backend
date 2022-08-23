@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 import validateEmail from '../utils/validateEmail.js';
 
 
@@ -8,6 +8,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Email is required'],
         validate: [validateEmail, 'Please fill a valid email address'],
+        unique: true,
     },
     name: {
         type: String,
@@ -28,5 +29,5 @@ const UserSchema = new Schema({
     timestamps: true,
 });
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = model('User', UserSchema);
 export default UserModel;
