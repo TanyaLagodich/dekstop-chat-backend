@@ -1,4 +1,5 @@
 import Express from 'express';
+import cors from 'cors';
 import * as dotenv from 'dotenv';
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
@@ -20,6 +21,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // update to match the domain you will make the request from
@@ -28,10 +30,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', router);
-
-app.get('/', (req, res) => {
-  res.send('Hello world');
-})
 
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');

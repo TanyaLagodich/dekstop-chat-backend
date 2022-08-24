@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.token;
+  const authHeader = req.headers['x-api-token'];
 
   if (authHeader) {
       const token = authHeader.split(' ')[1];

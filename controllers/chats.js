@@ -1,4 +1,5 @@
 import ChatModel from "../models/Chat.js";
+import MessageModel from './../models/Message.js';
 
 class ChatController {
 
@@ -9,7 +10,7 @@ class ChatController {
   }
 
   async create(req, res) {
-    const { members } = req.body;
+    const { members, text } = req.body;
     const chat = new ChatModel({ members });
     try {
 
@@ -18,6 +19,10 @@ class ChatController {
         res.status(422); // TODO status 
         res.json({message: 'Chat is exist'});
       } else {
+        await chat.save();
+        const message = await MessageModel({ chatId: chat.id, text });
+        message.save();
+        chat.lastMessage = message;
         await chat.save();
         await chat.populate('members');
         res.json(chat);

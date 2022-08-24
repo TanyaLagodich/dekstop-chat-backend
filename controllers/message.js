@@ -10,16 +10,11 @@ class MessageContoller {
   }
 
   async create (req, res) {
-    const { dialog, text, messageTo, messageFrom } = req.body;
+    const { chatId, text } = req.body;
+    const userId = req.user._id;
 
     try {
-    if (!dialog) {
-      const newDialog = new DialogModel({ members: [messageTo, messageFrom] });
-      dialog = await newDialog.save();
-      console.log(dialog);
-    }
-
-    const newMessage = new MessageModel({ dialog, text, messageTo, messageFrom });
+    const newMessage = new MessageModel({ chatId, text, userId });
       const result = await newMessage.save();
       res.json(result);
     } catch (err) {

@@ -44,4 +44,10 @@ export default class UserController {
     }
   }
 
+  async profile (req, res) {
+    const { user: { _id }} = req.user;
+    const user = await UserModel.findById(_id).select('-password');
+    res.json(user);
+  }
+
 }
